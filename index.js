@@ -4,7 +4,7 @@ const { userRouter } = require("./routes/user.routes")
 const { authenticate } = require("./middlewares/authenticate.middlewares")
 const cors=require("cors")
 require('dotenv').config();
-
+const port = process.env.Port || 8000
 const app = express()
 
 app.use(express.json())
@@ -17,10 +17,10 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter)
 app.use(authenticate)
 
-app.listen(process.env.Port, async () => {
+app.listen(port, async () => {
     try {
         await connection
-        console.log("conneccted with Database")
+        console.log("connected with Database")
     } catch (err) {
         console.log(err.message)
     }
